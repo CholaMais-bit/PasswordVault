@@ -18,6 +18,8 @@ namespace PasswordVault.Menu
             Console.WriteLine("[1] Create password for vault");
             Console.WriteLine("[2] Create vault");
             Console.WriteLine("[3] Display vaults");
+            Console.WriteLine("[4] Change password");
+            Console.WriteLine("[5] Delete vault");
         }
 
         // Sair do programa
@@ -80,10 +82,10 @@ namespace PasswordVault.Menu
                 var vaults = vaultService.GetAllVaults();
 
                 Console.WriteLine("=== Vaults ===\n");
-                string password = InputHelper.StringInput("Insert a session password: ");
+                string password = InputHelper.StringInput("Session Password: ");
 
                 SessionHelper.VerifyPasswordSession(password);
-                
+
                 Console.WriteLine();
                 foreach (var vault in vaults)
                 {
@@ -96,6 +98,49 @@ namespace PasswordVault.Menu
                     }
                     Console.WriteLine();
                 }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"\nError: {ex.Message}!\n");
+            }
+        }
+
+        // Edita a senha de uma plataforma
+        public void ChangePassword()
+        {
+            try
+            {
+                Console.Clear();
+
+                Console.WriteLine("=== Change Password ===\n");
+                string plataform = InputHelper.StringInput("Plataform: ");
+                string password = InputHelper.StringInput("Password: ");
+
+                vaultService.ChangePassword(plataform, password);
+
+                Console.WriteLine("\nPassword changed successfully!\n");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"\nError: {ex.Message}!\n");
+            }
+        }
+
+        // Remove um cofre
+        public void DeleteVault()
+        {
+            try
+            {
+                Console.Clear();
+
+                Console.WriteLine("=== Delete Vault ===\n");
+                string password = InputHelper.StringInput("Session Password: ");
+                SessionHelper.VerifyPasswordSession(password);
+                string plataform = InputHelper.StringInput("Plataform: ");
+
+                vaultService.DeleteVault(plataform);
+
+                Console.WriteLine("\nVault deleted successfully!\n");
             }
             catch (Exception ex)
             {

@@ -37,6 +37,14 @@ class Program
                     mainMenu.DisplayVaults();
                     break;
 
+                case 4:
+                    mainMenu.ChangePassword();
+                    break;
+
+                case 5:
+                    mainMenu.DeleteVault();
+                    break;
+
                 default:
                     Console.Clear();
                     Console.WriteLine("Insert a valid value");

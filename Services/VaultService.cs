@@ -14,25 +14,50 @@ namespace PasswordVault.Services
             return new List<Vault>(vaults);
         }
 
-        // Verifica se já há uma senha para o site ou app
-        public void VerifySite(string plataform)
+        // Verifica se a plataforma existe
+        public Vault VerifyPlataformExists(string plataform, string message)
         {
-            bool vault = vaults.Any(x => x.Plataform == plataform);
+            Vault? vault = vaults.FirstOrDefault(x => x.Plataform == plataform);
 
-            if (vault)
+            if (vault == null)
             {
-                throw new Exception("You already have a password for this site");
+                throw new Exception(message);
             }
+
+            return vault;
         }
 
-        // Criar um vault
+        // Criar um cofre
         public void CreateVault(string plataform, string password)
         {
-            // Verifica se já existe uma senha para o site/app
-            VerifySite(plataform);
+            // Verifica se a plataforma existe
+            bool plataformExists = vaults.Any(x => x.Plataform == plataform);
+
+            if (plataformExists)
+            {
+                throw new Exception("You already have a password for this plataform");
+            }
 
             Vault newVault = new Vault(plataform, password);
             vaults.Add(newVault);
+        }
+
+        // Mudar a senha de um cofre
+        public void ChangePassword(string plataform, string password)
+        {
+            // Verifica se a plataforma existe
+            Vault vault = VerifyPlataformExists(plataform, "This platform is not registered");
+
+            vault.ChangePassword(password);
+        }
+
+        // Deletar um cofre
+        public void DeleteVault(string plataform)
+        {
+            // Verifica se a plataforma existe
+            Vault vault = VerifyPlataformExists(plataform, "This platform is not registered");
+
+            vaults.Remove(vault);
         }
     }
 }
