@@ -22,26 +22,32 @@ class Program
             switch (option)
             {
                 case 0:
+                    // Finaliza o programa
                     running = mainMenu.ExitProgram();
                     break;
 
                 case 1:
+                    // Cria uma senha para acessar os cofres
                     mainMenu.CreatePasswordForVault();
                     break;
 
                 case 2:
+                    // Cria um cofre
                     mainMenu.CreateVault();
                     break;
 
                 case 3:
+                    // Exibe os cofres
                     mainMenu.DisplayVaults();
                     break;
 
                 case 4:
+                    // Muda a senha de um cofre
                     mainMenu.ChangePassword();
                     break;
 
                 case 5:
+                    // Deleta um cofre
                     mainMenu.DeleteVault();
                     break;
 
