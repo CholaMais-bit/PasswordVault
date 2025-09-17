@@ -1,4 +1,5 @@
-﻿using PasswordVault.Utils;
+﻿using PasswordVault.Menu;
+using PasswordVault.Utils;
 
 class Program
 {
@@ -8,14 +9,26 @@ class Program
         Console.Clear();
         // Valor para manter ou finalizar o programa
         bool running = true;
+        // Instância de MainMenu
+        MainMenu mainMenu = new MainMenu();
 
         do
         {
+            // Exibe o menu do MainMenu
+            mainMenu.DisplayMainMenu();
             // Exibe o menu principal do programa
             int option = InputHelper.IntInput("Option: ");
 
             switch (option)
             {
+                case 0:
+                    running = mainMenu.ExitProgram();
+                    break;
+
+                case 1:
+                    mainMenu.CreateVault();
+                    break;
+
                 default:
                     Console.Clear();
                     Console.WriteLine("Insert a valid value");

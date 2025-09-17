@@ -16,5 +16,20 @@ namespace PasswordVault.Utils
 
             return val;
         }
+
+        // Validação de entrada string
+        public static string StringInput(string message)
+        {
+            Console.Write(message);
+            string str = Console.ReadLine() ?? "";
+
+            while (string.IsNullOrWhiteSpace(str))
+            {
+                Console.WriteLine("Invalid entry. Try again: ");
+                str = Console.ReadLine() ?? "";
+            }
+
+            return str;
+        }
     }
 }
