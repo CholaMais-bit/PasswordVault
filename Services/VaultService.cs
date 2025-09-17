@@ -15,19 +15,23 @@ namespace PasswordVault.Services
         }
 
         // Verifica se já há uma senha para o site ou app
-        public void VerifySite(string site)
+        public void VerifySite(string plataform)
         {
-            bool vault = vaults.Any(x => x.Site == site);
-            throw new Exception ("You already have a password for this site");
+            bool vault = vaults.Any(x => x.Plataform == plataform);
+
+            if (vault)
+            {
+                throw new Exception("You already have a password for this site");
+            }
         }
 
         // Criar um vault
-        public void CreateVault(string site, string password)
+        public void CreateVault(string plataform, string password)
         {
             // Verifica se já existe uma senha para o site/app
-            VerifySite(site);
-            
-            Vault newVault = new Vault(site, password);
+            VerifySite(plataform);
+
+            Vault newVault = new Vault(plataform, password);
             vaults.Add(newVault);
         }
     }

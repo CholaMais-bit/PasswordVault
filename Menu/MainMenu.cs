@@ -1,3 +1,4 @@
+using PasswordVault.Models;
 using PasswordVault.Services;
 using PasswordVault.Utils;
 
@@ -14,7 +15,9 @@ namespace PasswordVault.Menu
         {
             Console.WriteLine("=== Main Menu ===");
             Console.WriteLine("[0] Exit program");
-            Console.WriteLine("[1] Create vault");
+            Console.WriteLine("[1] Create password for vault");
+            Console.WriteLine("[2] Create vault");
+            Console.WriteLine("[3] Display vaults");
         }
 
         // Sair do programa
@@ -25,6 +28,27 @@ namespace PasswordVault.Menu
             return false;
         }
 
+        // Criar uma senha para acessar o cofre
+        public void CreatePasswordForVault()
+        {
+            try
+            {
+                Console.Clear();
+
+                // Pede os dados para o usuário
+                Console.WriteLine("=== Create Password ===\n");
+                string password = InputHelper.StringInput("Password: ");
+
+                Session session = new Session(password);
+
+                Console.WriteLine("\nPassword created successfully!\n");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"\nError: {ex.Message}!\n");
+            }
+        }
+
         // Criar um cofre de senha
         public void CreateVault()
         {
@@ -33,17 +57,49 @@ namespace PasswordVault.Menu
                 Console.Clear();
 
                 // Pede os dados para o usuário
-                Console.WriteLine("=== Create Vault ===");
-                string site = InputHelper.StringInput("Site or App: ");
+                Console.WriteLine("=== Create Vault ===\n");
+                string plataform = InputHelper.StringInput("Plataform: ");
                 string password = InputHelper.StringInput("Password: ");
 
-                vaultService.CreateVault(site, password);
+                vaultService.CreateVault(plataform, password);
 
-                Console.WriteLine("Vault created successfully!");
+                Console.WriteLine("\nVault created successfully!\n");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error: {ex.Message}!");
+                Console.WriteLine($"\nError: {ex.Message}!\n");
+            }
+        }
+
+        // Exibir os cofres
+        public void DisplayVaults()
+        {
+            try
+            {
+                Console.Clear();
+                var vaults = vaultService.GetAllVaults();
+
+                Console.WriteLine("=== Vaults ===\n");
+                string password = InputHelper.StringInput("Insert a session password: ");
+
+                SessionHelper.VerifyPasswordSession(password);
+                
+                Console.WriteLine();
+                foreach (var vault in vaults)
+                {
+                    Console.WriteLine($"Plataform: {vault.Plataform}");
+                    Console.WriteLine($"Password: {vault.Password}");
+                    Console.WriteLine($"Date of Creation: {vault.DateOfCreation}");
+                    if (vault.DateOfLastChange != default)
+                    {
+                        Console.WriteLine($"Date of Last Change: {vault.DateOfLastChange}");
+                    }
+                    Console.WriteLine();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"\nError: {ex.Message}!\n");
             }
         }
     }

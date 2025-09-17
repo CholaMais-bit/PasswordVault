@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "9ipdRjXTtUM=",
+  "dgSpecHash": "ii0KWjYmSSQ=",
   "success": true,
   "projectFilePath": "C:\\Users\\emalu\\OneDrive\\Documentos\\Códigos\\PasswordVault\\PasswordVault.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\emalu\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -26,7 +26,15 @@ class Program
                     break;
 
                 case 1:
+                    mainMenu.CreatePasswordForVault();
+                    break;
+
+                case 2:
                     mainMenu.CreateVault();
+                    break;
+
+                case 3:
+                    mainMenu.DisplayVaults();
                     break;
 
                 default:
