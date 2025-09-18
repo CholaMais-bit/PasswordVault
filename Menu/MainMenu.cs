@@ -51,7 +51,7 @@ namespace PasswordVault.Menu
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"\nError: {ex.Message}!\n");
+                Console.WriteLine($"\nError: {ex.Message}\n");
             }
         }
 
@@ -73,7 +73,7 @@ namespace PasswordVault.Menu
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"\nError: {ex.Message}!\n");
+                Console.WriteLine($"\nError: {ex.Message}\n");
             }
         }
 
@@ -105,7 +105,7 @@ namespace PasswordVault.Menu
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"\nError: {ex.Message}!\n");
+                Console.WriteLine($"\nError: {ex.Message}\n");
             }
         }
 
@@ -126,7 +126,7 @@ namespace PasswordVault.Menu
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"\nError: {ex.Message}!\n");
+                Console.WriteLine($"\nError: {ex.Message}\n");
             }
         }
 
@@ -148,7 +148,7 @@ namespace PasswordVault.Menu
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"\nError: {ex.Message}!\n");
+                Console.WriteLine($"\nError: {ex.Message}\n");
             }
         }
     }

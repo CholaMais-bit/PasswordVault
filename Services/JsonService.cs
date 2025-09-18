@@ -24,19 +24,27 @@ namespace PasswordVault.Services
         // Salvar no JSON
         public void SaveInJson()
         {
-            var dataToSave = new
+            try
             {
-                SessionHash = Session.GetPasswordHash(),
-                Vaults = vaultService.GetAllVaults()
-            };
+                var dataToSave = new
+                {
+                    SessionHash = Session.GetPasswordHash(),
+                    Vaults = vaultService.GetAllVaults()
+                };
 
-            string jsonString = JsonSerializer.Serialize(dataToSave, new JsonSerializerOptions { WriteIndented = true });
+                string jsonString = JsonSerializer.Serialize(dataToSave, new JsonSerializerOptions { WriteIndented = true });
 
-            CreateJsonFolder();
+                CreateJsonFolder();
 
-            string ArquivePath = Path.Combine(Environment.CurrentDirectory, "Data", "vaults.json");
+                string ArquivePath = Path.Combine(Environment.CurrentDirectory, "Data", "vaults.json");
 
-            File.WriteAllText(ArquivePath, jsonString);
+                File.WriteAllText(ArquivePath, jsonString);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"\nERROR: {ex.Message}\n");
+            }
+
         }
 
         // Carregar o JSON
@@ -62,7 +70,7 @@ namespace PasswordVault.Services
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"\nERROR: {ex.Message}!\n");
+                Console.WriteLine($"\nERROR: {ex.Message}\n");
                 return new List<Vault>();
             }
         }
