@@ -5,7 +5,7 @@ namespace PasswordVault.Models
     // Conjunto de informações para a senha do usuário
     public class Vault
     {
-        public string Plataform { get; private set; } = "";
+        public string Platform { get; private set; } = "";
         public string Password { get; private set; } = "";
         public DateTime DateOfCreation { get; private set; } = default;
         public DateTime DateOfLastChange { get; private set; } = default;
@@ -13,13 +13,13 @@ namespace PasswordVault.Models
         // Construtor para deserializar o json
         [JsonConstructor]
         public Vault(
-            string plataform,
+            string platform,
             string password,
             DateTime dateOfCreation,
             DateTime dateOfLastChange
         )
         {
-            Plataform = plataform;
+            Platform = platform;
             Password = password;
             DateOfCreation = dateOfCreation;
             DateOfLastChange = dateOfLastChange;
@@ -28,7 +28,7 @@ namespace PasswordVault.Models
         // Inicializar os valores do objeto
         public Vault(string site, string password)
         {
-            Plataform = site;
+            Platform = site;
             Password = password;
             DateOfCreation = DateTime.Now;
         }

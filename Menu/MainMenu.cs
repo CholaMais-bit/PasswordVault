@@ -64,10 +64,10 @@ namespace PasswordVault.Menu
 
                 // Pede os dados para o usuário
                 Console.WriteLine("=== Create Vault ===\n");
-                string plataform = InputHelper.StringInput("Plataform: ");
+                string platform = InputHelper.StringInput("Platform: ");
                 string password = InputHelper.StringInput("Password: ");
 
-                vaultService.CreateVault(plataform, password);
+                vaultService.CreateVault(platform, password);
 
                 Console.WriteLine("\nVault created successfully!\n");
             }
@@ -93,7 +93,7 @@ namespace PasswordVault.Menu
                 Console.WriteLine();
                 foreach (var vault in vaults)
                 {
-                    Console.WriteLine($"Plataform: {vault.Plataform}");
+                    Console.WriteLine($"Platform: {vault.Platform}");
                     Console.WriteLine($"Password: {vault.Password}");
                     Console.WriteLine($"Date of Creation: {vault.DateOfCreation}");
                     if (vault.DateOfLastChange != default)
@@ -117,10 +117,10 @@ namespace PasswordVault.Menu
                 Console.Clear();
 
                 Console.WriteLine("=== Change Password ===\n");
-                string plataform = InputHelper.StringInput("Plataform: ");
+                string platform = InputHelper.StringInput("Platform: ");
                 string password = InputHelper.StringInput("Password: ");
 
-                vaultService.ChangePassword(plataform, password);
+                vaultService.ChangePassword(platform, password);
 
                 Console.WriteLine("\nPassword changed successfully!\n");
             }
@@ -140,9 +140,9 @@ namespace PasswordVault.Menu
                 Console.WriteLine("=== Delete Vault ===\n");
                 string password = InputHelper.StringInput("Session Password: ");
                 SessionHelper.VerifyPasswordSession(password);
-                string plataform = InputHelper.StringInput("Plataform: ");
+                string platform = InputHelper.StringInput("Platform: ");
 
-                vaultService.DeleteVault(plataform);
+                vaultService.DeleteVault(platform);
 
                 Console.WriteLine("\nVault deleted successfully!\n");
             }

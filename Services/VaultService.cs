@@ -21,9 +21,9 @@ namespace PasswordVault.Services
         }
 
         // Verifica se a plataforma existe
-        public Vault VerifyPlataformExists(string plataform, string message)
+        public Vault VerifyPlataformExists(string platform, string message)
         {
-            Vault? vault = vaults.FirstOrDefault(x => x.Plataform == plataform);
+            Vault? vault = vaults.FirstOrDefault(x => x.Platform == platform);
 
             if (vault == null)
             {
@@ -34,34 +34,34 @@ namespace PasswordVault.Services
         }
 
         // Criar um cofre
-        public void CreateVault(string plataform, string password)
+        public void CreateVault(string platform, string password)
         {
             // Verifica se a plataforma existe
-            bool plataformExists = vaults.Any(x => x.Plataform == plataform);
+            bool plataformExists = vaults.Any(x => x.Platform == platform);
 
             if (plataformExists)
             {
-                throw new Exception("You already have a password for this plataform");
+                throw new Exception("You already have a password for this platform");
             }
 
-            Vault newVault = new Vault(plataform, password);
+            Vault newVault = new Vault(platform, password);
             vaults.Add(newVault);
         }
 
         // Mudar a senha de um cofre
-        public void ChangePassword(string plataform, string password)
+        public void ChangePassword(string platform, string password)
         {
             // Verifica se a plataforma existe
-            Vault vault = VerifyPlataformExists(plataform, "This platform is not registered");
+            Vault vault = VerifyPlataformExists(platform, "This platform is not registered");
 
             vault.ChangePassword(password);
         }
 
         // Deletar um cofre
-        public void DeleteVault(string plataform)
+        public void DeleteVault(string platform)
         {
             // Verifica se a plataforma existe
-            Vault vault = VerifyPlataformExists(plataform, "This platform is not registered");
+            Vault vault = VerifyPlataformExists(platform, "This platform is not registered");
 
             vaults.Remove(vault);
         }
