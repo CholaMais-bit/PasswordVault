@@ -21,42 +21,45 @@ class Program
             mainMenu.DisplayMainMenu();
             // Exibe o menu principal do programa
             int option = InputHelper.IntInput("Option: ");
+            // Boleano para salvar as alterações do projeto
+            bool changed = false;
 
             switch (option)
             {
                 case 0:
                     // Finaliza o programa
                     running = mainMenu.ExitProgram();
+                    changed = true;
                     break;
 
                 case 1:
                     // Cria uma senha para acessar os cofres
                     mainMenu.CreatePasswordForVault();
-                    jsonService.SaveInJson();
+                    changed = true;
                     break;
 
                 case 2:
                     // Cria um cofre
                     mainMenu.CreateVault();
-                    jsonService.SaveInJson();
+                    changed = true;
                     break;
 
                 case 3:
                     // Exibe os cofres
                     mainMenu.DisplayVaults();
-                    jsonService.SaveInJson();
+                    changed = true;
                     break;
 
                 case 4:
                     // Muda a senha de um cofre
                     mainMenu.ChangePassword();
-                    jsonService.SaveInJson();
+                    changed = true;
                     break;
 
                 case 5:
                     // Deleta um cofre
                     mainMenu.DeleteVault();
-                    jsonService.SaveInJson();
+                    changed = true;
                     break;
 
                 default:
@@ -64,9 +67,16 @@ class Program
                     Console.WriteLine("Insert a valid value");
                     break;
             }
+
+            if (changed)
+            {
+                jsonService.SaveInJson();
+            }
+
         } while (running);
     }
 
+    // Instâncias
     static (VaultService vaultService, MainMenu mainMenu, JsonService jsonService) Initialize()
     {
         // Criar uma única instância de VaultService
