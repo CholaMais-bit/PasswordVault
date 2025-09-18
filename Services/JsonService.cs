@@ -50,8 +50,15 @@ namespace PasswordVault.Services
                     return new List<Vault>();
                 }
 
-                string json = File.ReadAllText(path);
-                return JsonSerializer.Deserialize<List<Vault>>(json) ?? new List<Vault>();
+                // Classe interna apenas para leitura do JSON
+                var jsonData = JsonSerializer.Deserialize<JsonElement>(File.ReadAllText(path));
+
+                // Atualiza a SessionHash estática
+                Session.PasswordHash = jsonData.GetProperty("SessionHash").GetString() ?? "";
+
+                // Retorna os vaults
+                var vaultsJson = jsonData.GetProperty("Vaults").GetRawText();
+                return JsonSerializer.Deserialize<List<Vault>>(vaultsJson) ?? new List<Vault>();
             }
             catch (Exception ex)
             {
