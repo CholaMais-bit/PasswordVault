@@ -7,8 +7,12 @@ namespace PasswordVault.Menu
     // Classe que representa o menu principal
     public class MainMenu
     {
-        // Instância de VaultService
-        private VaultService vaultService = new VaultService();
+        private readonly VaultService vaultService;
+
+        public MainMenu(VaultService vaultService)
+        {
+            this.vaultService = vaultService;
+        }
 
         // Exibe as opções do MainMenu
         public void DisplayMainMenu()

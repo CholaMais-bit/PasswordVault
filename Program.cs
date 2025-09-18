@@ -1,4 +1,5 @@
 ﻿using PasswordVault.Menu;
+using PasswordVault.Services;
 using PasswordVault.Utils;
 
 class Program
@@ -7,10 +8,12 @@ class Program
     {
         // Limpar o console do vscode
         Console.Clear();
+        
         // Valor para manter ou finalizar o programa
         bool running = true;
-        // Instância de MainMenu
-        MainMenu mainMenu = new MainMenu();
+
+        // Incializar instâncias
+        var (vaultService, mainMenu, jsonService) = Initialize();
 
         do
         {
@@ -29,26 +32,31 @@ class Program
                 case 1:
                     // Cria uma senha para acessar os cofres
                     mainMenu.CreatePasswordForVault();
+                    jsonService.SaveInJson();
                     break;
 
                 case 2:
                     // Cria um cofre
                     mainMenu.CreateVault();
+                    jsonService.SaveInJson();
                     break;
 
                 case 3:
                     // Exibe os cofres
                     mainMenu.DisplayVaults();
+                    jsonService.SaveInJson();
                     break;
 
                 case 4:
                     // Muda a senha de um cofre
                     mainMenu.ChangePassword();
+                    jsonService.SaveInJson();
                     break;
 
                 case 5:
                     // Deleta um cofre
                     mainMenu.DeleteVault();
+                    jsonService.SaveInJson();
                     break;
 
                 default:
@@ -57,5 +65,20 @@ class Program
                     break;
             }
         } while (running);
+    }
+
+    static (VaultService vaultService, MainMenu mainMenu, JsonService jsonService) Initialize()
+    {
+        // Criar uma única instância de VaultService
+        VaultService vaultService = new VaultService();
+        // Instância de MainMenu
+        MainMenu mainMenu = new MainMenu(vaultService);
+        // Instância de JsonService
+        JsonService jsonService = new JsonService(vaultService);
+        // Carrega os dados do JSON
+        var vaultsFromJson = jsonService.LoadJson();
+        vaultService.SetVaults(vaultsFromJson);
+
+        return (vaultService, mainMenu, jsonService);
     }
 }

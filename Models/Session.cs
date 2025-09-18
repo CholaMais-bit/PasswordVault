@@ -1,9 +1,11 @@
+using System.Text.Json.Serialization;
+
 namespace PasswordVault.Models
 {
     // Contém a senha do usuário para acessar os cofres
     public class Session
     {
-        public static string PasswordHash { get; private set; } = "";
+        public static string PasswordHash { get; set; } = "";
 
         // Inicializa os valores
         public Session(string password)

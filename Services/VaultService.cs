@@ -14,6 +14,12 @@ namespace PasswordVault.Services
             return new List<Vault>(vaults);
         }
 
+        // Pegar a lista vaults carregas no JSON e colocar em vaults
+        public void SetVaults(List<Vault> loadedVaults)
+        {
+            vaults = loadedVaults;
+        }
+
         // Verifica se a plataforma existe
         public Vault VerifyPlataformExists(string plataform, string message)
         {
