@@ -7,9 +7,7 @@ namespace PasswordVault.Utils
     {
         public static bool VerifyPlataformExists(string platform, List<Vault> vaults)
         {
-            Vault? vault = vaults.FirstOrDefault(x => x.Platform == platform);
-
-            return string.Equals(platform, vault);
+            return vaults.Any(x => x.Platform.ToLower() == platform.ToLower());
         }
     }
 }
