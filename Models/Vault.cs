@@ -26,9 +26,14 @@ namespace PasswordVault.Models
         }
 
         // Inicializar os valores do objeto
-        public Vault(string site, string password)
+        public Vault(string platform, string password)
         {
-            Platform = site;
+            if (platform.Contains("\\") || password.Contains("\\"))
+            {
+                throw new Exception("User input cannot contain: \\");
+            }
+
+            Platform = platform;
             Password = password;
             DateOfCreation = DateTime.Now;
         }

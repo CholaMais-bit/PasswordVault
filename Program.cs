@@ -8,7 +8,7 @@ class Program
     {
         // Limpar o console do vscode
         Console.Clear();
-        
+
         // Valor para manter ou finalizar o programa
         bool running = true;
 

@@ -10,6 +10,16 @@ namespace PasswordVault.Models
         // Inicializa os valores
         public Session(string password)
         {
+            if (password.Contains("\\"))
+            {
+                throw new Exception("User input cannot contain: \\");
+            }
+
+            if (PasswordHash != "")
+            {
+                throw new Exception("A password already exists");
+            }
+
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(password);
         }
 
