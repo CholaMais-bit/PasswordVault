@@ -20,11 +20,12 @@ namespace PasswordVault.Menu
         {
             Console.WriteLine("=== Main Menu ===");
             Console.WriteLine("[0] Exit program");
-            Console.WriteLine("[1] Create password for vault");
-            Console.WriteLine("[2] Create vault");
-            Console.WriteLine("[3] Display vaults");
-            Console.WriteLine("[4] Change password");
-            Console.WriteLine("[5] Delete vault");
+            Console.WriteLine("[1] Create session password");
+            Console.WriteLine("[2] Change session password");
+            Console.WriteLine("[3] Create vault");
+            Console.WriteLine("[4] Display vaults");
+            Console.WriteLine("[5] Change password");
+            Console.WriteLine("[6] Delete vault");
         }
 
         // Sair do programa
@@ -43,7 +44,7 @@ namespace PasswordVault.Menu
                 Console.Clear();
 
                 // Pede os dados para o usuário
-                Console.WriteLine("=== Create Password ===\n");
+                Console.WriteLine("=== Create Session Password ===\n");
                 string password = InputHelper.StringInput("Password: ");
 
                 Session session = new Session(password);
@@ -61,6 +62,32 @@ namespace PasswordVault.Menu
             catch (Exception ex)
             {
                 Console.WriteLine($"\nError: {ex.Message}\n");
+            }
+        }
+
+        // Mudar a senha mestra
+        public void ChangeSessionPassword()
+        {
+            try
+            {
+                Console.Clear();
+
+                Console.WriteLine("=== Change Session Password ===\n");
+                string password = InputHelper.StringInput("Session password: ");
+                SessionHelper.VerifyPasswordSession(password);
+                string newPassword = InputHelper.StringInput("New password: ");
+
+                Session.ChangePassword(newPassword);
+
+                Console.WriteLine("\nPassword changed successfully!\n");
+            }
+            catch (ForbiddenCharsException ex)
+            {
+                Console.WriteLine($"\nERROR: {ex.Message}\n");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ERROR: {ex.Message}\n");
             }
         }
 
@@ -104,7 +131,6 @@ namespace PasswordVault.Menu
 
                 Console.WriteLine("=== Vaults ===\n");
                 string password = InputHelper.StringInput("Session Password: ");
-
                 SessionHelper.VerifyPasswordSession(password);
 
                 Console.WriteLine();
@@ -122,7 +148,7 @@ namespace PasswordVault.Menu
 
                 if (vaults.Count == 0)
                 {
-                    Console.WriteLine("\nNo registered safe");
+                    Console.WriteLine("No registered safe\n");
                 }
             }
             catch (SessionPasswordWrongException ex)
@@ -136,13 +162,15 @@ namespace PasswordVault.Menu
         }
 
         // Edita a senha de uma plataforma
-        public void ChangePassword()
+        public void ChangeVaultPassword()
         {
             try
             {
                 Console.Clear();
 
-                Console.WriteLine("=== Change Password ===\n");
+                Console.WriteLine("=== Change Vault Password ===\n");
+                string sessionPassword = InputHelper.StringInput("Session password: ");
+                SessionHelper.VerifyPasswordSession(sessionPassword);
                 string platform = InputHelper.StringInput("Platform: ");
                 string password = InputHelper.StringInput("Password: ");
 
@@ -156,7 +184,7 @@ namespace PasswordVault.Menu
             }
             catch (PlatformIsNotRegisteredException ex)
             {
-                Console.WriteLine($"\nERROR: {ex.Message}");
+                Console.WriteLine($"\nERROR: {ex.Message}\n");
             }
             catch (ForbiddenCharsException ex)
             {

@@ -31,5 +31,11 @@ namespace PasswordVault.Models
         {
             return PasswordHash;
         }
+
+        // Método para mudar a senha mestra
+        public static void ChangePassword(string newPassword)
+        {
+            PasswordHash = BCrypt.Net.BCrypt.HashPassword(newPassword);
+        }
     }
 }

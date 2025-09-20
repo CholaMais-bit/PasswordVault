@@ -39,24 +39,30 @@ class Program
                     break;
 
                 case 2:
+                    // Mudar a senha da sessão
+                    mainMenu.ChangeSessionPassword();
+                    changed = true;
+                    break;
+
+                case 3:
                     // Cria um cofre
                     mainMenu.CreateVault();
                     changed = true;
                     break;
 
-                case 3:
+                case 4:
                     // Exibe os cofres
                     mainMenu.DisplayVaults();
                     changed = true;
                     break;
 
-                case 4:
+                case 5:
                     // Muda a senha de um cofre
-                    mainMenu.ChangePassword();
+                    mainMenu.ChangeVaultPassword();
                     changed = true;
                     break;
 
-                case 5:
+                case 6:
                     // Deleta um cofre
                     mainMenu.DeleteVault();
                     changed = true;
