@@ -55,10 +55,6 @@ namespace PasswordVault.Menu
             {
                 Console.WriteLine($"\nError: {ex.Message}\n");
             }
-            catch (ForbiddenCharsException ex)
-            {
-                Console.WriteLine($"\nError: {ex.Message}\n");
-            }
             catch (Exception ex)
             {
                 Console.WriteLine($"\nError: {ex.Message}\n");
@@ -82,10 +78,6 @@ namespace PasswordVault.Menu
                 Console.WriteLine("\nPassword changed successfully!\n");
             }
             catch (SessionPasswordWrongException ex)
-            {
-                Console.WriteLine($"\nERROR: {ex.Message}\n");
-            }
-            catch (ForbiddenCharsException ex)
             {
                 Console.WriteLine($"\nERROR: {ex.Message}\n");
             }
@@ -114,10 +106,6 @@ namespace PasswordVault.Menu
             catch (PlatformAlreadyExistException ex)
             {
                 Console.WriteLine($"\nERROR: {ex.Message}\n");
-            }
-            catch (ForbiddenCharsException ex)
-            {
-                Console.WriteLine($"\nError: {ex.Message}\n");
             }
             catch (Exception ex)
             {
@@ -189,10 +177,6 @@ namespace PasswordVault.Menu
             catch (PlatformIsNotRegisteredException ex)
             {
                 Console.WriteLine($"\nERROR: {ex.Message}\n");
-            }
-            catch (ForbiddenCharsException ex)
-            {
-                Console.WriteLine($"\nError: {ex.Message}\n");
             }
             catch (Exception ex)
             {

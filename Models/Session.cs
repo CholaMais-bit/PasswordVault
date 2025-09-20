@@ -11,13 +11,6 @@ namespace PasswordVault.Models
         // Inicializa os valores
         public Session(string password)
         {
-            char[] forbiddenChars = { '"', '\\', '/', '\b', '\f', '\n', '\r', '\t' };
-
-            if (password.IndexOfAny(forbiddenChars) >= 0)
-            {
-                throw new ForbiddenCharsException("User input cannot contain: \\");
-            }
-
             if (PasswordHash != "")
             {
                 throw new SessionPasswordAlreadyExistsException("A password already exists");
@@ -37,7 +30,7 @@ namespace PasswordVault.Models
         {
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(newPassword);
         }
-        
+
         // Verifica se a senha da sessão está certa
         public static void VerifyPasswordSession(string password)
         {

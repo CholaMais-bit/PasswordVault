@@ -29,14 +29,6 @@ namespace PasswordVault.Models
         // Inicializar os valores do objeto
         public Vault(string platform, string password)
         {
-            char[] forbiddenChars = { '"', '\\', '/', '\b', '\f', '\n', '\r', '\t' };
-
-            if (platform.IndexOfAny(forbiddenChars) >= 0 ||
-                password.IndexOfAny(forbiddenChars) >= 0)
-            {
-                throw new ForbiddenCharsException("User input cannot contain: \\");
-            }
-
             Platform = platform;
             Password = password;
             DateOfCreation = DateTime.Now;
