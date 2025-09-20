@@ -1,10 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "uRNhR8gt2sM=",
+  "dgSpecHash": "yPN41/BCavI=",
   "success": true,
-  "projectFilePath": "/home/lindomar/Documentos/Codigos/PasswordVault/PasswordVault.csproj",
+  "projectFilePath": "C:\\Users\\emalu\\OneDrive\\Documentos\\Códigos\\PasswordVault\\PasswordVault\\PasswordVault.csproj",
   "expectedPackageFiles": [
-    "/home/lindomar/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512"
+    "C:\\Users\\emalu\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
+    "C:\\Users\\emalu\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.19\\microsoft.netcore.app.ref.8.0.19.nupkg.sha512",
+    "C:\\Users\\emalu\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.19\\microsoft.windowsdesktop.app.ref.8.0.19.nupkg.sha512",
+    "C:\\Users\\emalu\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.19\\microsoft.aspnetcore.app.ref.8.0.19.nupkg.sha512",
+    "C:\\Users\\emalu\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.19\\microsoft.netcore.app.host.win-x64.8.0.19.nupkg.sha512"
   ],
   "logs": []
 }

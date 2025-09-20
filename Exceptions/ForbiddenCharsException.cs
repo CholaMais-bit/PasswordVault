@@ -1,6 +1,6 @@
 namespace PasswordVault.Exceptions
 {
-    // Classe que representa a exceção de caracteres proibidos
+    // Exceção de caracteres proibidos
     public class ForbiddenCharsException : Exception
     {
         public ForbiddenCharsException() { }

@@ -37,5 +37,14 @@ namespace PasswordVault.Models
         {
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(newPassword);
         }
+        
+        // Verifica se a senha da sessão está certa
+        public static void VerifyPasswordSession(string password)
+        {
+            if (!BCrypt.Net.BCrypt.Verify(password, Session.GetPasswordHash()))
+            {
+                throw new SessionPasswordWrongException("The session password is wrong");
+            }
+        }
     }
 }

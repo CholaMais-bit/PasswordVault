@@ -74,12 +74,16 @@ namespace PasswordVault.Menu
 
                 Console.WriteLine("=== Change Session Password ===\n");
                 string password = InputHelper.StringInput("Session password: ");
-                SessionHelper.VerifyPasswordSession(password);
+                Session.VerifyPasswordSession(password);
                 string newPassword = InputHelper.StringInput("New password: ");
 
                 Session.ChangePassword(newPassword);
 
                 Console.WriteLine("\nPassword changed successfully!\n");
+            }
+            catch (SessionPasswordWrongException ex)
+            {
+                Console.WriteLine($"\nERROR: {ex.Message}\n");
             }
             catch (ForbiddenCharsException ex)
             {
@@ -131,7 +135,7 @@ namespace PasswordVault.Menu
 
                 Console.WriteLine("=== Vaults ===\n");
                 string password = InputHelper.StringInput("Session Password: ");
-                SessionHelper.VerifyPasswordSession(password);
+                Session.VerifyPasswordSession(password);
 
                 Console.WriteLine();
                 foreach (var vault in vaults)
@@ -170,7 +174,7 @@ namespace PasswordVault.Menu
 
                 Console.WriteLine("=== Change Vault Password ===\n");
                 string sessionPassword = InputHelper.StringInput("Session password: ");
-                SessionHelper.VerifyPasswordSession(sessionPassword);
+                Session.VerifyPasswordSession(sessionPassword);
                 string platform = InputHelper.StringInput("Platform: ");
                 string password = InputHelper.StringInput("Password: ");
 
@@ -205,7 +209,7 @@ namespace PasswordVault.Menu
 
                 Console.WriteLine("=== Delete Vault ===\n");
                 string password = InputHelper.StringInput("Session Password: ");
-                SessionHelper.VerifyPasswordSession(password);
+                Session.VerifyPasswordSession(password);
                 string platform = InputHelper.StringInput("Platform: ");
 
                 vaultService.DeleteVault(platform);
