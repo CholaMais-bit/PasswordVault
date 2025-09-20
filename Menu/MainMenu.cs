@@ -119,6 +119,15 @@ namespace PasswordVault.Menu
                     }
                     Console.WriteLine();
                 }
+
+                if (vaults.Count == 0)
+                {
+                    Console.WriteLine("\nNo registered safe");
+                }
+            }
+            catch (SessionPasswordWrongException ex)
+            {
+                Console.WriteLine($"\nError: {ex.Message}\n");
             }
             catch (Exception ex)
             {
@@ -140,6 +149,14 @@ namespace PasswordVault.Menu
                 vaultService.ChangePassword(platform, password);
 
                 Console.WriteLine("\nPassword changed successfully!\n");
+            }
+            catch (SessionPasswordWrongException ex)
+            {
+                Console.WriteLine($"\nERROR: {ex.Message}\n");
+            }
+            catch (PlatformIsNotRegisteredException ex)
+            {
+                Console.WriteLine($"\nERROR: {ex.Message}");
             }
             catch (ForbiddenCharsException ex)
             {
@@ -166,6 +183,14 @@ namespace PasswordVault.Menu
                 vaultService.DeleteVault(platform);
 
                 Console.WriteLine("\nVault deleted successfully!\n");
+            }
+            catch (SessionPasswordWrongException ex)
+            {
+                Console.WriteLine($"\nERROR: {ex.Message}\n");
+            }
+            catch (PlatformIsNotRegisteredException ex)
+            {
+                Console.WriteLine($"\nERROR: {ex.Message}\n");
             }
             catch (Exception ex)
             {

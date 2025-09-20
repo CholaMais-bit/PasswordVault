@@ -1,3 +1,4 @@
+using PasswordVault.Exceptions;
 using PasswordVault.Models;
 
 namespace PasswordVault.Utils
@@ -10,7 +11,7 @@ namespace PasswordVault.Utils
         {
             if (!BCrypt.Net.BCrypt.Verify(password, Session.GetPasswordHash()))
             {
-                throw new Exception("The session password is wrong");
+                throw new SessionPasswordWrongException("The session password is wrong");
             }
         }
     }

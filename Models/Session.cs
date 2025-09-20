@@ -20,7 +20,7 @@ namespace PasswordVault.Models
 
             if (PasswordHash != "")
             {
-                throw new ForbiddenCharsException("A password already exists");
+                throw new SessionPasswordAlreadyExistsException("A password already exists");
             }
 
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(password);
