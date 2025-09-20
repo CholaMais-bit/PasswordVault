@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using PasswordVault.Exceptions;
 
 namespace PasswordVault.Models
 {
@@ -28,9 +29,12 @@ namespace PasswordVault.Models
         // Inicializar os valores do objeto
         public Vault(string platform, string password)
         {
-            if (platform.Contains("\\") || password.Contains("\\"))
+            char[] forbiddenChars = { '"', '\\', '/', '\b', '\f', '\n', '\r', '\t' };
+
+            if (platform.IndexOfAny(forbiddenChars) >= 0 ||
+                password.IndexOfAny(forbiddenChars) >= 0)
             {
-                throw new Exception("User input cannot contain: \\");
+                throw new ForbiddenCharsException("User input cannot contain: \\");
             }
 
             Platform = platform;

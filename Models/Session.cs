@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using PasswordVault.Exceptions;
 
 namespace PasswordVault.Models
 {
@@ -10,14 +11,16 @@ namespace PasswordVault.Models
         // Inicializa os valores
         public Session(string password)
         {
-            if (password.Contains("\\"))
+            char[] forbiddenChars = { '"', '\\', '/', '\b', '\f', '\n', '\r', '\t' };
+
+            if (password.IndexOfAny(forbiddenChars) >= 0)
             {
-                throw new Exception("User input cannot contain: \\");
+                throw new ForbiddenCharsException("User input cannot contain: \\");
             }
 
             if (PasswordHash != "")
             {
-                throw new Exception("A password already exists");
+                throw new ForbiddenCharsException("A password already exists");
             }
 
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(password);

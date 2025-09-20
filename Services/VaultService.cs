@@ -1,3 +1,4 @@
+using PasswordVault.Exceptions;
 using PasswordVault.Models;
 using PasswordVault.Utils;
 
@@ -21,25 +22,12 @@ namespace PasswordVault.Services
             vaults = loadedVaults;
         }
 
-        // Verifica se a plataforma existe
-        public Vault FindVaultOrThrow(string platform, string message)
-        {
-            Vault? vault = vaults.FirstOrDefault(x => x.Platform == platform);
-
-            if (vault == null)
-            {
-                throw new Exception(message);
-            }
-
-            return vault;
-        }
-
         // Criar um cofre
         public void CreateVault(string platform, string password)
         {
             if (VaultHelper.VerifyPlataformExists(platform, vaults))
             {
-                throw new Exception("You already have a password for this platform");
+                throw new PlatformAlreadyExistException("You already have a password for this platform");
             }
 
             Vault newVault = new Vault(platform, password);
@@ -50,7 +38,7 @@ namespace PasswordVault.Services
         public void ChangePassword(string platform, string password)
         {
             // Verifica se a plataforma existe
-            Vault vault = FindVaultOrThrow(platform, "This platform is not registered");
+            Vault vault = VaultHelper.FindVaultOrThrow(platform, vaults);
 
             vault.ChangePassword(password);
         }
@@ -59,7 +47,7 @@ namespace PasswordVault.Services
         public void DeleteVault(string platform)
         {
             // Verifica se a plataforma existe
-            Vault vault = FindVaultOrThrow(platform, "This platform is not registered");
+            Vault vault = VaultHelper.FindVaultOrThrow(platform, vaults);
 
             vaults.Remove(vault);
         }

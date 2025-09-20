@@ -1,3 +1,4 @@
+using PasswordVault.Exceptions;
 using PasswordVault.Models;
 using PasswordVault.Services;
 using PasswordVault.Utils;
@@ -49,6 +50,14 @@ namespace PasswordVault.Menu
 
                 Console.WriteLine("\nPassword created successfully!\n");
             }
+            catch (SessionPasswordAlreadyExistsException ex)
+            {
+                Console.WriteLine($"\nError: {ex.Message}\n");
+            }
+            catch (ForbiddenCharsException ex)
+            {
+                Console.WriteLine($"\nError: {ex.Message}\n");
+            }
             catch (Exception ex)
             {
                 Console.WriteLine($"\nError: {ex.Message}\n");
@@ -70,6 +79,14 @@ namespace PasswordVault.Menu
                 vaultService.CreateVault(platform, password);
 
                 Console.WriteLine("\nVault created successfully!\n");
+            }
+            catch (PlatformAlreadyExistException ex)
+            {
+                Console.WriteLine($"\nERROR: {ex.Message}\n");
+            }
+            catch (ForbiddenCharsException ex)
+            {
+                Console.WriteLine($"\nError: {ex.Message}\n");
             }
             catch (Exception ex)
             {
@@ -123,6 +140,10 @@ namespace PasswordVault.Menu
                 vaultService.ChangePassword(platform, password);
 
                 Console.WriteLine("\nPassword changed successfully!\n");
+            }
+            catch (ForbiddenCharsException ex)
+            {
+                Console.WriteLine($"\nError: {ex.Message}\n");
             }
             catch (Exception ex)
             {
