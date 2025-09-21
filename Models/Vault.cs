@@ -8,8 +8,8 @@ namespace PasswordVault.Models
     {
         public string Platform { get; private set; } = "";
         public string Password { get; private set; } = "";
-        public DateTime DateOfCreation { get; private set; } = default;
-        public DateTime DateOfLastChange { get; private set; } = default;
+        public DateTime DateOfCreation { get; private set; }
+        public DateTime DateOfLastChange { get; private set; }
 
         // Construtor para deserializar o json
         [JsonConstructor]
@@ -32,6 +32,7 @@ namespace PasswordVault.Models
             Platform = platform;
             Password = password;
             DateOfCreation = DateTime.Now;
+            DateOfLastChange = DateTime.Now;
         }
 
         // Alterar a senha

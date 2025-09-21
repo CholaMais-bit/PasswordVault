@@ -31,5 +31,20 @@ namespace PasswordVault.Utils
 
             return str;
         }
+
+        // Validação de entrada y/n
+        public static char CharInput(string message, char[] permitedChars)
+        {
+            Console.Write(message);
+            string str = Console.ReadLine() ?? "";
+
+            while (str.Length != 1 || !permitedChars.Contains(str[0]))
+            {
+                Console.Write("Invalid entry. Try again: ");
+                str = Console.ReadLine() ?? "";
+            }
+
+            return str[0];
+        }
     }
 }

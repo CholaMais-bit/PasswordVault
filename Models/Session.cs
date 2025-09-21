@@ -41,12 +41,14 @@ namespace PasswordVault.Models
         }
 
         // Verifica se a senha da sessão está certa
-        public static void VerifyPasswordSession(string password)
+        public static bool VerifyPasswordSession(string password)
         {
             if (!BCrypt.Net.BCrypt.Verify(password, Session.GetPasswordHash()))
             {
                 throw new SessionPasswordWrongException("The session password is wrong");
             }
+
+            return true;
         }
     }
 }

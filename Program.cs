@@ -8,12 +8,12 @@ class Program
     {
         // Limpar o console do vscode
         Console.Clear();
-
         // Valor para manter ou finalizar o programa
         bool running = true;
-
         // Incializar instâncias
-        var (vaultService, mainMenu, jsonService) = Initialize();
+        var (vaultService, mainMenu, jsonService, loginMenu) = Initialize();
+        // Logar no programa
+        Login();
 
         do
         {
@@ -33,38 +33,32 @@ class Program
                     break;
 
                 case 1:
-                    // Cria uma senha para acessar os cofres
-                    mainMenu.CreatePasswordForVault();
-                    changed = true;
-                    break;
-
-                case 2:
-                    // Mudar a senha da sessão
-                    mainMenu.ChangeSessionPassword();
-                    changed = true;
-                    break;
-
-                case 3:
                     // Cria um cofre
                     mainMenu.CreateVault();
                     changed = true;
                     break;
 
-                case 4:
+                case 2:
                     // Exibe os cofres
                     mainMenu.DisplayVaults();
                     changed = true;
                     break;
 
-                case 5:
+                case 3:
                     // Muda a senha de um cofre
                     mainMenu.ChangeVaultPassword();
                     changed = true;
                     break;
 
-                case 6:
+                case 4:
                     // Deleta um cofre
                     mainMenu.DeleteVault();
+                    changed = true;
+                    break;
+
+                case 5:
+                    // Mudar a senha da sessão
+                    mainMenu.ChangeSessionPassword();
                     changed = true;
                     break;
 
@@ -83,7 +77,12 @@ class Program
     }
 
     // Instâncias
-    static (VaultService vaultService, MainMenu mainMenu, JsonService jsonService) Initialize()
+    static (
+        VaultService vaultService,
+        MainMenu mainMenu,
+        JsonService jsonService,
+        LoginMenu loginMenu
+    ) Initialize()
     {
         // Criar uma única instância de VaultService
         VaultService vaultService = new VaultService();
@@ -91,10 +90,49 @@ class Program
         MainMenu mainMenu = new MainMenu(vaultService);
         // Instância de JsonService
         JsonService jsonService = new JsonService(vaultService);
+        // Instância de LoginMenu
+        LoginMenu loginMenu = new LoginMenu(vaultService);
         // Carrega os dados do JSON
         var vaultsFromJson = jsonService.LoadJson();
         vaultService.SetVaults(vaultsFromJson);
 
-        return (vaultService, mainMenu, jsonService);
+        return (vaultService, mainMenu, jsonService, loginMenu);
+    }
+
+    // Função para logar no programa
+    static void Login()
+    {
+        // Inicializar instâncias
+        var (vaultService, mainMenu, jsonService, loginMenu) = Initialize();
+        // Caso o usuário logar ir para o menu principal
+        bool logged = false;
+
+        while (!logged)
+        {
+            loginMenu.DisplayLoginMenuOptions();
+            int option = InputHelper.IntInput("Option: ");
+
+            switch (option)
+            {
+                case 0:
+                    // Finaliza o programa
+                    mainMenu.ExitProgram();
+                    Environment.Exit(0);
+                    break;
+
+                case 1:
+                    logged = loginMenu.Login();
+                    break;
+
+                case 2:
+                    loginMenu.SingUp();
+                    break;
+
+                default:
+                    Console.Clear();
+                    Console.WriteLine("Insert a valid value");
+                    break;
+            }
+        }
     }
 }

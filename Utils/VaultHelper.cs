@@ -6,15 +6,25 @@ namespace PasswordVault.Utils
     // Helpers dos cofres
     public class VaultHelper
     {
-        public static bool VerifyPlataformExists(string platform, List<Vault> vaults)
+        // Verifica se o cofre existe
+        public static void VerifyPlataformExists(string platform, List<Vault> vaults)
         {
-            return vaults.Any(x => x.Platform.ToLower() == platform.ToLower());
+            Vault? vault = vaults.FirstOrDefault(
+                x => string.Equals(x.Platform, platform, StringComparison.OrdinalIgnoreCase)
+            );
+
+            if (vault != null)
+            {
+                throw new PlatformAlreadyExistException("This platform already exist");
+            }
         }
 
-        // Verifica se a plataforma existe
+        // Retorna uma plataforma
         public static Vault FindVaultOrThrow(string platform, List<Vault> vaults)
         {
-            Vault? vault = vaults.FirstOrDefault(x => x.Platform.ToLower() == platform.ToLower());
+            Vault? vault = vaults.FirstOrDefault(
+                x => String.Equals(x.Platform, platform, StringComparison.OrdinalIgnoreCase)
+            );
 
             if (vault == null)
             {

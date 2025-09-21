@@ -25,10 +25,7 @@ namespace PasswordVault.Services
         // Criar um cofre
         public void CreateVault(string platform, string password)
         {
-            if (VaultHelper.VerifyPlataformExists(platform, vaults))
-            {
-                throw new PlatformAlreadyExistException("You already have a password for this platform");
-            }
+            VaultHelper.VerifyPlataformExists(platform, vaults);
 
             LogService.SaveInLog($"User created vault: {platform}");
 

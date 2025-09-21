@@ -20,12 +20,11 @@ namespace PasswordVault.Menu
         {
             Console.WriteLine("=== Main Menu ===");
             Console.WriteLine("[0] Exit program");
-            Console.WriteLine("[1] Create session password");
-            Console.WriteLine("[2] Change session password");
-            Console.WriteLine("[3] Create vault");
-            Console.WriteLine("[4] Display vaults");
-            Console.WriteLine("[5] Change password");
-            Console.WriteLine("[6] Delete vault");
+            Console.WriteLine("[1] Create vault");
+            Console.WriteLine("[2] Display vaults");
+            Console.WriteLine("[3] Change password");
+            Console.WriteLine("[4] Delete vault");
+            Console.WriteLine("[5] Change session password");
         }
 
         // Sair do programa
@@ -34,31 +33,6 @@ namespace PasswordVault.Menu
             Console.Clear();
             Console.WriteLine("Finalized Program");
             return false;
-        }
-
-        // Criar uma senha para acessar o cofre
-        public void CreatePasswordForVault()
-        {
-            try
-            {
-                Console.Clear();
-
-                // Pede os dados para o usuário
-                Console.WriteLine("=== Create Session Password ===\n");
-                string password = InputHelper.StringInput("Password: ");
-
-                Session session = new Session(password);
-
-                Console.WriteLine("\nPassword created successfully!\n");
-            }
-            catch (SessionPasswordAlreadyExistsException ex)
-            {
-                Console.WriteLine($"\nError: {ex.Message}\n");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"\nError: {ex.Message}\n");
-            }
         }
 
         // Mudar a senha mestra
@@ -75,7 +49,7 @@ namespace PasswordVault.Menu
 
                 Session.ChangePassword(newPassword);
 
-                Console.WriteLine("\nPassword changed successfully!\n");
+                Console.WriteLine("\nSession Password changed successfully!\n");
             }
             catch (SessionPasswordWrongException ex)
             {
@@ -101,7 +75,7 @@ namespace PasswordVault.Menu
 
                 vaultService.CreateVault(platform, password);
 
-                Console.WriteLine("\nVault created successfully!\n");
+                Console.WriteLine($"\nVault {platform} created successfully!\n");
             }
             catch (PlatformAlreadyExistException ex)
             {
@@ -109,7 +83,7 @@ namespace PasswordVault.Menu
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"\nError: {ex.Message}\n");
+                Console.WriteLine($"\nERROR: {ex.Message}\n");
             }
         }
 
@@ -122,19 +96,13 @@ namespace PasswordVault.Menu
                 var vaults = vaultService.GetAllVaults();
 
                 Console.WriteLine("=== Vaults ===\n");
-                string password = InputHelper.StringInput("Session Password: ");
-                Session.VerifyPasswordSession(password);
 
-                Console.WriteLine();
                 foreach (var vault in vaults)
                 {
                     Console.WriteLine($"Platform: {vault.Platform}");
                     Console.WriteLine($"Password: {vault.Password}");
                     Console.WriteLine($"Date of Creation: {vault.DateOfCreation}");
-                    if (vault.DateOfLastChange != default)
-                    {
-                        Console.WriteLine($"Date of Last Change: {vault.DateOfLastChange}");
-                    }
+                    Console.WriteLine($"Date of Last Change: {vault.DateOfLastChange}");
                     Console.WriteLine();
                 }
 
@@ -145,11 +113,11 @@ namespace PasswordVault.Menu
             }
             catch (SessionPasswordWrongException ex)
             {
-                Console.WriteLine($"\nError: {ex.Message}\n");
+                Console.WriteLine($"\nERROR: {ex.Message}\n");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"\nError: {ex.Message}\n");
+                Console.WriteLine($"\nERROR: {ex.Message}\n");
             }
         }
 
@@ -162,13 +130,12 @@ namespace PasswordVault.Menu
 
                 Console.WriteLine("=== Change Vault Password ===\n");
                 string sessionPassword = InputHelper.StringInput("Session password: ");
-                Session.VerifyPasswordSession(sessionPassword);
                 string platform = InputHelper.StringInput("Platform: ");
                 string password = InputHelper.StringInput("Password: ");
 
                 vaultService.ChangePassword(platform, password);
 
-                Console.WriteLine("\nPassword changed successfully!\n");
+                Console.WriteLine($"\n{platform} Password changed successfully!\n");
             }
             catch (SessionPasswordWrongException ex)
             {
@@ -180,7 +147,7 @@ namespace PasswordVault.Menu
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"\nError: {ex.Message}\n");
+                Console.WriteLine($"\nERROR: {ex.Message}\n");
             }
         }
 
@@ -195,10 +162,18 @@ namespace PasswordVault.Menu
                 string password = InputHelper.StringInput("Session Password: ");
                 Session.VerifyPasswordSession(password);
                 string platform = InputHelper.StringInput("Platform: ");
+                char[] options = { 'y', 'n' };
+                char confirmation = InputHelper.CharInput("Confirm (y/n): ", options);
+
+                if (confirmation == 'n')
+                {
+                    Console.WriteLine("\nCancelled\n");
+                    return;
+                }
 
                 vaultService.DeleteVault(platform);
 
-                Console.WriteLine("\nVault deleted successfully!\n");
+                Console.WriteLine($"\nVault {platform} deleted successfully!\n");
             }
             catch (SessionPasswordWrongException ex)
             {
@@ -210,7 +185,7 @@ namespace PasswordVault.Menu
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"\nError: {ex.Message}\n");
+                Console.WriteLine($"\nERROR: {ex.Message}\n");
             }
         }
     }
