@@ -30,6 +30,8 @@ namespace PasswordVault.Services
                 throw new PlatformAlreadyExistException("You already have a password for this platform");
             }
 
+            LogService.SaveInLog($"User created vault: {platform}");
+
             Vault newVault = new Vault(platform, password);
             vaults.Add(newVault);
         }
@@ -40,6 +42,8 @@ namespace PasswordVault.Services
             // Verifica se a plataforma existe
             Vault vault = VaultHelper.FindVaultOrThrow(platform, vaults);
 
+            LogService.SaveInLog($"User changed password: {platform}");
+
             vault.ChangePassword(password);
         }
 
@@ -48,6 +52,8 @@ namespace PasswordVault.Services
         {
             // Verifica se a plataforma existe
             Vault vault = VaultHelper.FindVaultOrThrow(platform, vaults);
+
+            LogService.SaveInLog($"User deleted vault: {platform}");
 
             vaults.Remove(vault);
         }

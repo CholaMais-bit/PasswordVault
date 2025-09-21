@@ -17,8 +17,8 @@ namespace PasswordVault.Services
         // Cria um arquivo JSON
         public void CreateJsonFolder()
         {
-            string past = Path.Combine(Environment.CurrentDirectory, "Data");
-            Directory.CreateDirectory(past);
+            string path = Path.Combine(Environment.CurrentDirectory, "Data");
+            Directory.CreateDirectory(path);
         }
 
         // Salvar no JSON
@@ -62,7 +62,7 @@ namespace PasswordVault.Services
                 var jsonData = JsonSerializer.Deserialize<JsonElement>(File.ReadAllText(path));
 
                 // Atualiza a SessionHash estática
-                Session.PasswordHash = jsonData.GetProperty("SessionHash").GetString() ?? "";
+                Session.LoadPasswordFromJson(jsonData.GetProperty("SessionHash").GetString() ?? "");
 
                 // Retorna os vaults
                 var vaultsJson = jsonData.GetProperty("Vaults").GetRawText();

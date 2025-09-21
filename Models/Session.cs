@@ -6,7 +6,7 @@ namespace PasswordVault.Models
     // Contém a senha do usuário para acessar os cofres
     public class Session
     {
-        public static string PasswordHash { get; set; } = "";
+        public static string PasswordHash { get; private set; } = "";
 
         // Inicializa os valores
         public Session(string password)
@@ -23,6 +23,15 @@ namespace PasswordVault.Models
         public static string GetPasswordHash()
         {
             return PasswordHash;
+        }
+
+        // Método para carregar a senha do json
+        public static void LoadPasswordFromJson(string password)
+        {
+            if (password != null)
+            {
+                PasswordHash = password;
+            }
         }
 
         // Método para mudar a senha mestra
