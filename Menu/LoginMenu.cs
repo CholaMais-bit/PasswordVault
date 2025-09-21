@@ -39,6 +39,7 @@ namespace PasswordVault.Menu
                 }
 
                 Console.WriteLine("\nLogged!\n");
+                LogService.SaveInLog("User logged");
                 return true;
             }
             catch (SessionPasswordWrongException ex)
@@ -74,6 +75,7 @@ namespace PasswordVault.Menu
                 Session session = new Session(password);
 
                 Console.WriteLine("\nPassword created successfully!\n");
+                LogService.SaveInLog("User registered");
             }
             catch (SessionPasswordAlreadyExistsException ex)
             {

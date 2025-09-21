@@ -11,7 +11,7 @@ namespace PasswordVault.Utils
 
             while (!int.TryParse(Console.ReadLine(), out val))
             {
-                Console.WriteLine("Invalid entry. Try again: ");
+                Console.Write("Invalid entry. Try again: ");
             }
 
             return val;
@@ -25,7 +25,7 @@ namespace PasswordVault.Utils
 
             while (string.IsNullOrWhiteSpace(str))
             {
-                Console.WriteLine("Invalid entry. Try again: ");
+                Console.Write("Invalid entry. Try again: ");
                 str = Console.ReadLine() ?? "";
             }
 
