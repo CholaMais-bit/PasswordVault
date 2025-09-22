@@ -16,6 +16,13 @@ namespace PasswordVault.Models
                 throw new SessionPasswordAlreadyExistsException("A password already exists");
             }
 
+            if (password.Length < 8)
+            {
+                throw new PasswordLengthMustBeGreaterThan8Exception(
+                    "Password length must be greater than 8 char"
+                );
+            }
+
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(password);
         }
 
@@ -37,6 +44,13 @@ namespace PasswordVault.Models
         // Método para mudar a senha mestra
         public static void ChangePassword(string newPassword)
         {
+            if (newPassword.Length < 8)
+            {
+                throw new PasswordLengthMustBeGreaterThan8Exception(
+                    "Password length must be greater than 8 char"
+                );
+            }
+
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(newPassword);
         }
 

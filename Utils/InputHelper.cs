@@ -32,7 +32,7 @@ namespace PasswordVault.Utils
             return str;
         }
 
-        // Validação de entrada y/n
+        // Validação de entrada de caracteres
         public static char CharInput(string message, char[] permitedChars)
         {
             Console.Write(message);

@@ -29,6 +29,13 @@ namespace PasswordVault.Models
         // Inicializar os valores do objeto
         public Vault(string platform, string password)
         {
+            if (password.Length < 8)
+            {
+                throw new PasswordLengthMustBeGreaterThan8Exception(
+                    "Password length must be greater than 8 char"
+                );
+            }
+
             Platform = platform;
             Password = password;
             DateOfCreation = DateTime.Now;
@@ -38,6 +45,13 @@ namespace PasswordVault.Models
         // Alterar a senha
         public void ChangePassword(string password)
         {
+            if (password.Length < 8)
+            {
+                throw new PasswordLengthMustBeGreaterThan8Exception(
+                    "Password length must be greater than 8 char"
+                );
+            }
+            
             Password = password;
             DateOfLastChange = DateTime.Now;
         }

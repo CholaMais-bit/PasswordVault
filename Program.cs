@@ -86,8 +86,10 @@ class Program
     {
         // Criar uma única instância de VaultService
         VaultService vaultService = new VaultService();
+        // Instância de PasswordGeneratorMenu
+        PasswordGeneratorMenu passwordGeneratorMenu = new PasswordGeneratorMenu();
         // Instância de MainMenu
-        MainMenu mainMenu = new MainMenu(vaultService);
+        MainMenu mainMenu = new MainMenu(vaultService, passwordGeneratorMenu);
         // Instância de JsonService
         JsonService jsonService = new JsonService(vaultService);
         // Instância de LoginMenu

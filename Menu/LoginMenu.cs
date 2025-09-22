@@ -64,7 +64,7 @@ namespace PasswordVault.Menu
                 // Pede os dados para o usuário
                 Console.WriteLine("=== Create Session Password ===\n");
                 string password = InputHelper.StringInput("Password: ");
-                string confirmPassword = InputHelper.StringInput("Password again: ");
+                string confirmPassword = InputHelper.StringInput("Confirm password: ");
 
                 if (password != confirmPassword)
                 {

@@ -9,10 +9,12 @@ namespace PasswordVault.Menu
     public class MainMenu
     {
         private readonly VaultService vaultService;
+        private readonly PasswordGeneratorMenu passwordGeneratorMenu;
 
-        public MainMenu(VaultService vaultService)
+        public MainMenu(VaultService vaultService, PasswordGeneratorMenu passwordGeneratorMenu)
         {
             this.vaultService = vaultService;
+            this.passwordGeneratorMenu = passwordGeneratorMenu;
         }
 
         // Exibe as opções do MainMenu
@@ -57,7 +59,7 @@ namespace PasswordVault.Menu
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"ERROR: {ex.Message}\n");
+                Console.WriteLine($"\nERROR: {ex.Message}\n");
             }
         }
 
@@ -71,7 +73,30 @@ namespace PasswordVault.Menu
                 // Pede os dados para o usuário
                 Console.WriteLine("=== Create Vault ===\n");
                 string platform = InputHelper.StringInput("Platform: ");
-                string password = InputHelper.StringInput("Password: ");
+                passwordGeneratorMenu.DisplayPasswordGeneratorOptions();
+                string password = "";
+                int option = InputHelper.IntInput("Option: ");
+
+                while (password == "")
+                {
+                    switch (option)
+                    {
+                        case 1:
+                            // Criar sua própia senha
+                            password = InputHelper.StringInput("Password: ");
+                            break;
+
+                        case 2:
+                            // Gerar a senha
+                            password = passwordGeneratorMenu.GeneratePassword();
+                            break;
+
+                        default:
+                            Console.Clear();
+                            Console.WriteLine("Insert a valid value");
+                            break;
+                    }
+                }
 
                 vaultService.CreateVault(platform, password);
 
