@@ -16,7 +16,8 @@ namespace PasswordVault.Models
                 throw new SessionPasswordAlreadyExistsException("A password already exists");
             }
 
-            if (password.Length < 8)
+            int lenghtLimit = 8;
+            if (password.Length < lengthLimit)
             {
                 throw new PasswordLengthMustBeGreaterThan8Exception(
                     "Password length must be greater than 8 char"

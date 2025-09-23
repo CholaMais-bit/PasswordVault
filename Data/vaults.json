@@ -1,17 +1,11 @@
 {
-  "SessionHash": "$2a$11$1zHUjRL3sCkQt2NZBpUzp.87NErVwWBtoknvMk5tIcyBxyNZlswHS",
+  "SessionHash": "$2a$11$TObZcajZKSLrqnR4NVM0ROHvPi4mAM5ftw0L7QQu87ZpIClUAJS9e",
   "Vaults": [
     {
       "Platform": "Google",
-      "Password": "jnIJt\u0027Xok[yG5Q6W6tko)\u003CNWMm3i#H",
-      "DateOfCreation": "2025-09-21T22:07:11.9532546-03:00",
-      "DateOfLastChange": "2025-09-21T22:07:11.953255-03:00"
-    },
-    {
-      "Platform": "Udemy",
-      "Password": "#1(B!Jx!f*Yb",
-      "DateOfCreation": "2025-09-22T14:43:55.1664907-03:00",
-      "DateOfLastChange": "2025-09-22T14:43:55.1664912-03:00"
+      "Password": "z#_cOZ}/%PGg",
+      "DateOfCreation": "2025-09-23T08:11:48.9949179-03:00",
+      "DateOfLastChange": "2025-09-23T08:11:48.9949598-03:00"
     }
   ]
 }

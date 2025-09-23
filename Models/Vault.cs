@@ -29,7 +29,8 @@ namespace PasswordVault.Models
         // Inicializar os valores do objeto
         public Vault(string platform, string password)
         {
-            if (password.Length < 8)
+            int lenghtLimit = 8;
+            if (password.Length < lenghtLimit)
             {
                 throw new PasswordLengthMustBeGreaterThan8Exception(
                     "Password length must be greater than 8 char"
