@@ -77,7 +77,7 @@ namespace PasswordVault.Menu
                 string password = "";
                 int option = InputHelper.IntInput("Option: ");
 
-                while (password == "")
+                while (password.Length < 8)
                 {
                     switch (option)
                     {
@@ -96,11 +96,20 @@ namespace PasswordVault.Menu
                             Console.WriteLine("Insert a valid value");
                             break;
                     }
+
+                    if (password.Length < 8)
+                    {
+                        Console.WriteLine("Password length must be greater than 8 char");
+                    }
                 }
 
                 vaultService.CreateVault(platform, password);
 
                 Console.WriteLine($"\nVault {platform} created successfully!\n");
+            }
+            catch (PasswordLengthMustBeGreaterThan8Exception ex)
+            {
+                Console.WriteLine($"\nERROR: {ex.Message}\n");
             }
             catch (PlatformAlreadyExistException ex)
             {

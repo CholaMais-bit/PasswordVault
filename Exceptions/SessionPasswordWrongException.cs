@@ -8,6 +8,6 @@ namespace PasswordVault.Exceptions
         public SessionPasswordWrongException(string message) : base(message) { }
 
         public SessionPasswordWrongException(string message, Exception ex)
-         : base(message, ex) { }
+            : base(message, ex) { }
     }
 }

@@ -1,11 +1,17 @@
 {
-  "SessionHash": "$2a$11$1T/l1agFXS4KpEgI0JCsQ.d0tMrKew9Pm/SgPxdtEVa/pK39GccKe",
+  "SessionHash": "$2a$11$1zHUjRL3sCkQt2NZBpUzp.87NErVwWBtoknvMk5tIcyBxyNZlswHS",
   "Vaults": [
     {
-      "Platform": "steam",
-      "Password": "lindomiro",
-      "DateOfCreation": "2025-09-21T21:09:19.5370069-03:00",
-      "DateOfLastChange": "2025-09-21T21:09:57.0867228-03:00"
+      "Platform": "Google",
+      "Password": "jnIJt\u0027Xok[yG5Q6W6tko)\u003CNWMm3i#H",
+      "DateOfCreation": "2025-09-21T22:07:11.9532546-03:00",
+      "DateOfLastChange": "2025-09-21T22:07:11.953255-03:00"
+    },
+    {
+      "Platform": "Udemy",
+      "Password": "#1(B!Jx!f*Yb",
+      "DateOfCreation": "2025-09-22T14:43:55.1664907-03:00",
+      "DateOfLastChange": "2025-09-22T14:43:55.1664912-03:00"
     }
   ]
 }

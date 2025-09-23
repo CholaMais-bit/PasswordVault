@@ -13,7 +13,7 @@ class Program
         // Incializar instâncias
         var (vaultService, mainMenu, jsonService, loginMenu) = Initialize();
         // Logar no programa
-        Login();
+        Login(loginMenu, mainMenu);
 
         do
         {
@@ -102,10 +102,8 @@ class Program
     }
 
     // Função para logar no programa
-    static void Login()
+    static void Login(LoginMenu loginMenu, MainMenu mainMenu)
     {
-        // Inicializar instâncias
-        var (vaultService, mainMenu, jsonService, loginMenu) = Initialize();
         // Caso o usuário logar ir para o menu principal
         bool logged = false;
 
@@ -127,7 +125,7 @@ class Program
                     break;
 
                 case 2:
-                    loginMenu.SingUp();
+                    loginMenu.SignUp();
                     break;
 
                 default:

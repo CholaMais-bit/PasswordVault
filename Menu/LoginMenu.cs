@@ -55,7 +55,7 @@ namespace PasswordVault.Menu
         }
 
         // Criar uma senha para acessar o cofre
-        public void SingUp()
+        public void SignUp()
         {
             try
             {

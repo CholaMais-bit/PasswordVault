@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using PasswordVault.Utils;
 
 namespace PasswordVault.Services
@@ -14,12 +15,12 @@ namespace PasswordVault.Services
         // Gerar senha
         public static string GeneratePassword(int size)
         {
-            Random rand = new Random();
             char[] password = new char[size];
-
+    
             for (int i = 0; i < size; i++)
             {
-                password[i] = allChars[(rand.Next(allChars.Length))];
+                int number = RandomNumberGenerator.GetInt32(0, allChars.Length);
+                password[i] = allChars[number];
             }
 
             return new string(password);
